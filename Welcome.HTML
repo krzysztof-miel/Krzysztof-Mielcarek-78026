@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Witaj!</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2e;
+      --text: #e7ecff;
+      --muted: #a9b4d6;
+      --accent: #6aa6ff;
+      --btn: #1b2a4a;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    body.light {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #2563eb;
+      --btn: #eef2ff;
+      --shadow: 0 12px 40px rgba(2,6,23,.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(106,166,255,.35), transparent 55%),
+                  radial-gradient(900px 500px at 80% 30%, rgba(99,102,241,.25), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(900px, 100%);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    body.light .card {
+      background: var(--card);
+      border-color: rgba(2,6,23,0.08);
+      backdrop-filter: none;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    body.light .topbar {
+      border-bottom-color: rgba(2,6,23,0.08);
+    }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), rgba(99,102,241,.9));
+      box-shadow: 0 10px 30px rgba(37,99,235,.35);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+      padding: 22px;
+    }
+
+    @media (max-width: 820px) {
+      .content { grid-template-columns: 1fr; }
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    body.light .panel {
+      background: #f8fafc;
+      border-color: rgba(2,6,23,0.08);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--btn);
+      cursor: pointer;
+      transition: transform .08s ease, opacity .2s ease;
+    }
+
+    button:hover { opacity: .92; }
+    button:active { transform: scale(0.98); }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), rgba(99,102,241,.95));
+      color: white;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    label { font-size: 13px; color: var(--muted); }
+
+    input {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.12);
+      color: var(--text);
+      outline: none;
+    }
+
+    body.light input {
+      background: white;
+      border-color: rgba(2,6,23,0.12);
+      color: var(--text);
+    }
+
+    .tips {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tip {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-top: 6px;
+      background: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .footer {
+      padding: 14px 20px 18px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    body.light .footer {
+      border-top-color: rgba(2,6,23,0.08);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Moja Aplikacja</span>
+      </div>
+      <button id="themeBtn" type="button" title="Zmień motyw">🌙 Motyw</button>
+    </header>
+
+    <section class="content">
+      <div>
+        <h1>Witaj, <span id="nameOut">nowy użytkowniku</span> 👋</h1>
+        <p>
+          Cieszymy się, że jesteś z nami. Ta strona to prosty szablon powitalny,
+          który możesz rozbudować o logowanie, onboarding, linki do dokumentacji lub dashboard.
+        </p>
+
+        <div class="actions">
+          <button class="primary" type="button" id="startBtn">Zaczynamy</button>
+          <button type="button" id="docsBtn">Dokumentacja</button>
+          <button type="button" id="contactBtn">Kontakt</button>
+        </div>
+
+        <div class="tips">
+          <div class="tip">
+            <span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Krótki onboarding</strong>
+              <p>Dodaj 3 kroki: profil → ustawienia → pierwszy cel.</p>
+            </div>
+          </div>
+          <div class="tip">
+            <span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Szybkie akcje</strong>
+              <p>Przyciski prowadzą użytkownika do najważniejszych miejsc.</p>
+            </div>
+          </div>
+          <div class="tip">
+            <span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Responsywny układ</strong>
+              <p>Działa dobrze na telefonie i na desktopie.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Panel użytkownika">
+        <h2 style="margin:0 0 6px; font-size: 18px;">Personalizacja</h2>
+        <p>Wpisz imię, a nagłówek zaktualizuje się automatycznie.</p>
+
+        <div class="field">
+          <label for="nameIn">Twoje imię</label>
+          <input id="nameIn" type="text" placeholder="np. Krzysztof" autocomplete="given-name" />
+        </div>
+
+        <div class="field">
+          <label>Podgląd</label>
+          <input id="preview" type="text" readonly />
+        </div>
+
+        <div class="actions" style="margin-top: 12px;">
+          <button type="button" id="saveBtn">Zapisz</button>
+          <button type="button" id="resetBtn">Reset</button>
+        </div>
+
+        <p style="margin-top: 12px; font-size: 13px;">
+          Tip: możesz zapisywać imię w <code>localStorage</code> (już działa 😉).
+        </p>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Moja Aplikacja</span>
+      <span><a href="#" id="privacyLink">Polityka prywatności</a></span>
+    </footer>
+  </main>
+
+  <script>
+    const nameOut = document.getElementById("nameOut");
+    const nameIn = document.getElementById("nameIn");
+    const preview = document.getElementById("preview");
+
+    const saveBtn = document.getElementById("saveBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const themeBtn = document.getElementById("themeBtn");
+
+    const startBtn = document.getElementById("startBtn");
+    const docsBtn = document.getElementById("docsBtn");
+    const contactBtn = document.getElementById("contactBtn");
+
+    const year = document.getElementById("year");
+    year.textContent = new Date().getFullYear();
+
+    function setName(name) {
+      const safe = (name || "").trim();
+      const finalName = safe ? safe : "nowy użytkowniku";
+      nameOut.textContent = finalName;
+      preview.value = `Witaj, ${finalName}!`;
+    }
+
+    // load saved
+    const savedName = localStorage.getItem("welcome_name");
+    if (savedName) {
+      nameIn.value = savedName;
+      setName(savedName);
+    } else {
+      setName("");
+    }
+
+    nameIn.addEventListener("input", () => setName(nameIn.value));
+
+    saveBtn.addEventListener("click", () => {
+      localStorage.setItem("welcome_name", nameIn.value.trim());
+      alert("Zapisano 🙂");
+    });
+
+    resetBtn.addEventListener("click", () => {
+      localStorage.removeItem("welcome_name");
+      nameIn.value = "";
+      setName("");
+    });
+
+    // theme toggle
+    const savedTheme = localStorage.getItem("welcome_theme");
+    if (savedTheme === "light") document.body.classList.add("light");
+
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem("welcome_theme", document.body.classList.contains("light") ? "light" : "dark");
+    });
+
+    // simple navigation demo
+    startBtn.addEventListener("click", () => alert("Tu możesz przekierować do rejestracji / dashboardu."));
+    docsBtn.addEventListener("click", () => alert("Tu możesz podpiąć link do dokumentacji."));
+    contactBtn.addEventListener("click", () => alert("Tu możesz dodać mail / formularz kontaktowy."));
+  </script>
+</body>
+</html>
